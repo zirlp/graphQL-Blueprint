@@ -2,7 +2,7 @@ import { Tab, Tabs } from "@blueprintjs/core";
 
 const ContinentTabs = ({ continentSet, setContinent }) => {
   return (
-    <div>
+    <div className="Tabs_container">
       <Tabs
         id="Tabs"
         onChange={(tab) => setContinent(tab)}

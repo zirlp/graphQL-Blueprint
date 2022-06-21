@@ -3,23 +3,29 @@ import React, { useEffect, useState } from "react";
 import { client } from "./graphQL";
 import { useQuery } from "@apollo/client";
 import { LIST_COUNTRIES } from "./graphQL/Queries";
-// import CountryList from "./components/CountryList";
 import ContinentTabs from "./components/Tabs";
-import Table from "./components/Table2";
+import Table from "./components/Table";
+// import CountryList from "./components/CountryList";
 
 function App() {
   // const [country, setCountry] = useState();
-  const [continent, setContinent] = useState();
-  const [countryList, setCountryList] = useState();
-  const [continentSet, setContinentSet] = useState([]);
+  const [continent, setContinent] = useState("World");
+  const [continentSet, setContinentSet] = useState(["World"]);
+  const [countryList, setCountryList] = useState([]);
   const { data, loading, error } = useQuery(LIST_COUNTRIES, { client });
 
   useEffect(() => {
+    //this is for filtering
     setCountryList(
-      data?.countries.filter((country) => country.continent.name === continent)
+      continent !== "World"
+        ? data?.countries.filter(
+            (country) => country.continent.name === continent
+          )
+        : data?.countries
     );
   }, [continent, data?.countries]);
 
+  //i'd like to do this set of countries in another place...
   for (let i = 0; i < data?.countries.length; i++) {
     data?.countries.forEach((country) =>
       continentSet?.includes(country.continent.name)
@@ -35,7 +41,7 @@ function App() {
     <div>
       <ContinentTabs continentSet={continentSet} setContinent={setContinent} />
 
-      <Table countryList={countryList} />
+      {data ? <Table countryList={countryList} /> : <p>"Loading..."</p>}
     </div>
   );
 }
