@@ -1,9 +1,24 @@
-// import { Column, Table2, Cell } from "@blueprintjs/table";
-import Detail from "./Detail";
+import { Dialog } from "@blueprintjs/core";
+import { useCallback, useEffect, useState } from "react";
+import DialogBody from "./Detail";
 
 const Table = ({ countryList }) => {
+  const [detail, setDetail] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClose = useCallback(() => setIsOpen(false), []);
+  const handleButtonClick = useCallback((countryName, allCountries) => {
+    setIsOpen(!isOpen);
+    setDetail(
+      ...allCountries.filter((country) => country?.name === countryName)
+    );
+  }, []);
+
   return (
     <div>
+      <Dialog isOpen={isOpen} onClose={handleClose}>
+        <DialogBody detail={detail} close={handleClose} />
+      </Dialog>
+
       <table className="bp4-html-table  bp4-interactive bp4-html-table-condensed">
         <thead>
           <tr>
@@ -16,8 +31,12 @@ const Table = ({ countryList }) => {
           {countryList
             ? countryList.map((country) => {
                 return (
-                  <tr onClick={(event) => console.log(event.target.id)}>
-                    {/*onClick={(event) => <Detail id={event.target.id} />} */}
+                  // <tr onClick={(event) => console.log(event.target.id)}>
+                  <tr
+                    onClick={(event) =>
+                      handleButtonClick(event.target.id, countryList)
+                    }
+                  >
                     <td id={country.name}>{country.name}</td>
                     <td>{country.emoji}</td>
                     <td>{country.capital}</td>
