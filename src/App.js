@@ -1,20 +1,17 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { ApolloClient, InMemoryCache, useQuery } from "@apollo/client";
+import { client } from "./graphQL";
+import { useQuery } from "@apollo/client";
+import { LIST_COUNTRIES } from "./graphQL/Queries";
 // import CountryList from "./components/CountryList";
-import { Column, Table2, Cell } from "@blueprintjs/table";
-import { Tab, Tabs } from "@blueprintjs/core";
-import { LIST_CONTINENTS, LIST_COUNTRIES } from "./graphQL/Queries";
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: "https://countries.trevorblades.com",
-});
+import ContinentTabs from "./components/Tabs";
+import Table from "./components/Table2";
 
 function App() {
   // const [country, setCountry] = useState();
-  const [continent, setContintent] = useState();
+  const [continent, setContinent] = useState();
   const [countryList, setCountryList] = useState();
+  const [continentSet, setContinentSet] = useState([]);
   const { data, loading, error } = useQuery(LIST_COUNTRIES, { client });
 
   useEffect(() => {
@@ -23,43 +20,22 @@ function App() {
     );
   }, [continent, data?.countries]);
 
+  for (let i = 0; i < data?.countries.length; i++) {
+    data?.countries.forEach((country) =>
+      continentSet?.includes(country.continent.name)
+        ? null
+        : setContinentSet([...continentSet, country.continent.name])
+    );
+  }
+
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
   }
   return (
     <div>
-      <Tabs
-        id="Tabs"
-        onChange={(tab) => setContintent(tab)}
-        // selectedTabId="rx"
-      >
-        {LIST_CONTINENTS.map((cont) => (
-          <Tab key={cont} id={cont} title={cont} />
-        ))}
-        <Tabs.Expander />
-      </Tabs>
+      <ContinentTabs continentSet={continentSet} setContinent={setContinent} />
 
-      <Table2 numRows={countryList ? countryList.length : null}>
-        <Column
-          name="Country"
-          cellRenderer={(index) => (
-            <Cell>{countryList ? countryList[index].name : null}</Cell>
-          )}
-        />
-
-        <Column
-          name="Emoji"
-          cellRenderer={(index) => (
-            <Cell>{countryList ? countryList[index].emoji : null}</Cell>
-          )}
-        />
-        <Column
-          name="Capital"
-          cellRenderer={(index) => (
-            <Cell>{countryList ? countryList[index].capital : null}</Cell>
-          )}
-        />
-      </Table2>
+      <Table countryList={countryList} />
     </div>
   );
 }

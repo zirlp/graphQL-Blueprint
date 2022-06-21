@@ -14,13 +14,13 @@ export const LIST_COUNTRIES = gql`
   }
 `;
 
-export const LIST_CONTINENTS = [
-  //it should be build from an iteration of all possible continents
-  "Europe",
-  "North America",
-  "South America",
-  "Africa",
-  "Asia",
-  "Antarctica",
-  "Oceania",
-];
+// export const LIST_CONTINENTS = [
+//   //it should be build from an iteration of all possible continents
+//   "Europe",
+//   "North America",
+//   "South America",
+//   "Africa",
+//   "Asia",
+//   "Antarctica",
+//   "Oceania",
+// ];
