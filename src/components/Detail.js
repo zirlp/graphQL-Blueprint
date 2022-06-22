@@ -1,5 +1,4 @@
 // import { Dialog, DialogProps, Button } from "@blueprintjs/core";
-import React, { useCallback, useState } from "react";
 
 const DialogBody = ({ detail, close }) => {
   return (
@@ -31,14 +30,14 @@ const DialogBody = ({ detail, close }) => {
         <p>Currency: {detail.currency} </p>
       </div>
 
-      <div class="bp4-dialog-footer">
-        <div class="bp4-dialog-footer-actions">
-          <button type="button" class="bp4-button" onClick={close}>
+      <div className="bp4-dialog-footer">
+        <div className="bp4-dialog-footer-actions">
+          <button type="button" className="bp4-button" onClick={close}>
             Close
           </button>
           <button
             type="submit"
-            class="bp4-button bp4-intent-primary"
+            className="bp4-button bp4-intent-primary"
             onClick={close}
           >
             Close too

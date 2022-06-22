@@ -1,5 +1,5 @@
 import { Dialog } from "@blueprintjs/core";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import DialogBody from "./Detail";
 
 const Table = ({ countryList }) => {
