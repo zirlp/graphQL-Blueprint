@@ -1,24 +1,35 @@
 import { Tab, Tabs } from "@blueprintjs/core";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const ContinentTabs = ({ continentSet, setContinent }) => {
-  const { tab } = useParams();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  var params = searchParams.get("continent");
 
-  // const clickHandler = () => {
-  //   // navigate("/")
-  //   console.log("hola")
-  // }
+  useEffect(() => {
+    setContinent(params);
+  }, [searchParams]);
 
+  const handleOnChange = (tab) => {
+    setSearchParams({ continent: `${tab}` });
+  };
+
+  if (!params) {
+    setSearchParams({ continent: "World" });
+  }
   return (
     <div className="Tabs_container">
-      <Tabs id="Tabs" onChange={(tab) => setContinent(tab)}>
+      <Tabs
+        id="Tabs"
+        onChange={(tab) => handleOnChange(tab)}
+        selectedTabId={params}
+      >
         {continentSet.map((cont) => (
           <Tab
             key={cont}
             id={cont}
             title={cont}
-            onChange={(event) => navigate("/cont")} // ???
+            // ???
           />
         ))}
         <Tabs.Expander />
@@ -28,3 +39,7 @@ const ContinentTabs = ({ continentSet, setContinent }) => {
 };
 
 export default ContinentTabs;
+
+{
+  /* <Tabs id="Tabs" onChange={(tab) => setContinent(tab)}> */
+}
