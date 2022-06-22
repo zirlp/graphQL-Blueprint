@@ -3,7 +3,7 @@
 <p>This is a project designed primarily to learn and practice GraphQL as a data provider (API) and Blueprint for styles. All within the React framework.
 The main objective is to create an application in which you can consult information from countries around the world through filters and a searchbar. Likewise, you can also edit said information and add contact information of people from each country and all, of course, with a good Blueprint appearance. </p>
 
-# Instructions to run the app.
+<h3> Instructions to run the app. </h3>
 
 <ul>
 <li> Make sure you have npm and git bash installed on you system.</li>
