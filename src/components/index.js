@@ -12,6 +12,8 @@ function Main() {
   const [continent, setContinent] = useState("World");
   const [continentSet, setContinentSet] = useState(["World"]);
   const [countryList, setCountryList] = useState([]);
+  const [queryList, setQueryList] = useState([]);
+  const [query, setQuery] = useState();
   const { data, loading, error } = useQuery(LIST_COUNTRIES, { client });
 
   //i'd like to do this set of countries in another place...
@@ -24,7 +26,6 @@ function Main() {
   }
   useEffect(() => {
     //this is for filtering
-
     setCountryList(
       continent !== "World"
         ? data?.countries.filter(
@@ -32,16 +33,17 @@ function Main() {
           )
         : data?.countries
     );
-  }, [continent, data?.countries]);
+  }, [continent, data?.countries,query]);
 
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
   }
   return (
     <div>
-      <ContinentTabs continentSet={continentSet} setContinent={setContinent} />
+      
+      <ContinentTabs continentSet={continentSet} setContinent={setContinent} countryList={countryList} setQueryList={setQueryList} setQuery={setQuery} />
 
-      {data ? <Table countryList={countryList} /> : <p>"Loading..."</p>}
+      {data ? query&&!queryList.length ? <p>"nothing found"</p> : <Table countryList={queryList.length ? queryList : countryList} /> : <p>"Loading..."</p>}
     </div>
   );
 }
