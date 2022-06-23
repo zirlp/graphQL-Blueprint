@@ -13,8 +13,12 @@ const ContinentTabs = ({ continentSet, setContinent, countryList, setQueryList, 
     setInput(event.target.value)  //this is to "control" the input value
     setQuery(event.target.value)  //this is to pass it to parent component and do the filtering
     
-    let searchQuery = countryList.filter((country)=> country.name.toLowerCase().includes(event.target.value.toLowerCase())  )
-    setQueryList(searchQuery)
+    //if stops typing, trigger the search
+    const delayedSearch = setTimeout(()=> {
+      let searchQuery = countryList.filter((country)=> country.name.toLowerCase().includes(event.target.value.toLowerCase()) )
+      setQueryList(searchQuery)
+      },1000)
+      return ()=> clearTimeout(delayedSearch)
     
   }
   
@@ -29,10 +33,12 @@ const ContinentTabs = ({ continentSet, setContinent, countryList, setQueryList, 
   }
 
   useEffect(() => {
+    
     setContinent(params);
     setInput("") //clear input after making a tab change
     setQuery("") //same with query
   }, [searchParams]);
+
 
   return (
     <div className="Tabs_container">
@@ -56,9 +62,5 @@ const ContinentTabs = ({ continentSet, setContinent, countryList, setQueryList, 
 };
 
 export default ContinentTabs;
-
-{
-  /* <Tabs id="Tabs" onChange={(tab) => setContinent(tab)}> */
-}
 
 
