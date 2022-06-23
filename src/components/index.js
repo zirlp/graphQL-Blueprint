@@ -24,6 +24,7 @@ function Main() {
         : setContinentSet([...continentSet, country.continent.name])
     );
   }
+  
   useEffect(() => {
     //this is for filtering
     setCountryList(
