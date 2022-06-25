@@ -1,22 +1,29 @@
 import { Dialog } from "@blueprintjs/core";
 import { useCallback, useState } from "react";
-import DialogBody from "./Detail";
+import DialogBody from "./Detail.js";
+import Edit from "./EditDetail.js";
 
 const Table = ({ countryList }) => {
   const [detail, setDetail] = useState();
+  const [info, setInfo] = useState()
+  const [edit,setEdit] = useState(false)
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = useCallback(() => setIsOpen(false), []);
-  const handleButtonClick = useCallback((countryName, allCountries) => {
+
+  const handleButtonClick = useCallback((countryName, allCountries) => {   //all countries is countryList
     setIsOpen(!isOpen);
     setDetail(
       ...allCountries.filter((country) => country?.name === countryName)
     );
   }, []);
 
+
   return (
     <div>
       <Dialog isOpen={isOpen} onClose={handleClose}>
-        <DialogBody detail={detail} close={handleClose} />
+       {edit ? <Edit detail={detail} close={handleClose} setEdit={setEdit} edit={edit} setInfo={setInfo} info={info}/> :
+        <DialogBody detail={detail} close={handleClose} setEdit={setEdit} edit={edit} info={info}/>
+        }
       </Dialog>
 
       <table className="bp4-html-table  bp4-interactive bp4-html-table-condensed">

@@ -1,12 +1,16 @@
 import "./App.css";
-import { Routes, Route, Router } from "react-router-dom";
-import Main from "./components";
+import { Routes, Route } from "react-router-dom";
+import Main from "./components/index.js";
+import {ApolloProvider} from "@apollo/client"
+import { client } from "./graphQL/index.js";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Main />} />
-    </Routes>
+    <ApolloProvider client={client} >
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </ApolloProvider>
   );
 }
 

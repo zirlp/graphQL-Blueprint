@@ -1,9 +1,10 @@
 // import { Dialog, DialogProps, Button } from "@blueprintjs/core";
 
-const DialogBody = ({ detail, close }) => {
+const DialogBody = ({ detail, close, setEdit, edit }) => {
+
   return (
-    // <div className="bp4-dialog-container">
-    <div className="bp4-dialog">
+    <div>
+    {  <div className="bp4-dialog">
       <div className="bp4-dialog-header">
         <span className="bp4-icon-large bp4-icon-info-sign"></span>
         <h5 className="bp4-heading">Country details</h5>
@@ -28,24 +29,26 @@ const DialogBody = ({ detail, close }) => {
         </p>
         <p>Native name: {detail.native}</p>
         <p>Currency: {detail.currency} </p>
+        {detail.url ? <p>URL: {detail.url}</p> : <></>}
+        {detail.comment ? <p>Comment: {detail.comment}</p> : <></>}
       </div>
 
       <div className="bp4-dialog-footer">
         <div className="bp4-dialog-footer-actions">
-          <button type="button" className="bp4-button" onClick={close}>
-            Close
+          <button type="submit" className="bp4-button" onClick={close}>
+            Cancel
           </button>
           <button
             type="submit"
             className="bp4-button bp4-intent-primary"
-            onClick={close}
+            onClick={()=>setEdit(!edit)}
           >
-            Close too
-          </button>
+            Edit
+          </button> 
         </div>
       </div>
-    </div>
-    // </div>
+    </div>}
+  </div>
   );
 };
 

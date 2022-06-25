@@ -1,10 +1,10 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
-import { client } from "../graphQL";
+import { client } from "../graphQL/index.js";
 import { useQuery } from "@apollo/client";
-import { LIST_COUNTRIES } from "../graphQL/Queries";
-import ContinentTabs from "./Tabs";
-import Table from "./Table";
+import { LIST_COUNTRIES } from "../graphQL/Queries.js";
+import ContinentTabs from "./Tabs.js";
+import Table from "./Table.js";
 // import CountryList from "./components/CountryList";
 
 function Main() {
