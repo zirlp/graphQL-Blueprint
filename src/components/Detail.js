@@ -35,9 +35,6 @@ const DialogBody = ({ detail, close, setEdit, edit }) => {
 
       <div className="bp4-dialog-footer">
         <div className="bp4-dialog-footer-actions">
-          <button type="submit" className="bp4-button" onClick={close}>
-            Cancel
-          </button>
           <button
             type="submit"
             className="bp4-button bp4-intent-primary"
@@ -45,6 +42,9 @@ const DialogBody = ({ detail, close, setEdit, edit }) => {
           >
             Edit
           </button> 
+          <button type="submit" className="bp4-button" onClick={close}>
+            Close
+          </button>
         </div>
       </div>
     </div>}

@@ -5,7 +5,6 @@ import { useQuery } from "@apollo/client";
 import { LIST_COUNTRIES } from "../graphQL/Queries.js";
 import ContinentTabs from "./Tabs.js";
 import Table from "./Table.js";
-// import CountryList from "./components/CountryList";
 
 function Main() {
   // const [country, setCountry] = useState();
@@ -24,6 +23,7 @@ function Main() {
         : setContinentSet([...continentSet, country.continent.name])
     );
   }
+
   
   useEffect(() => {
     //this is for filtering
@@ -44,7 +44,7 @@ function Main() {
       
       <ContinentTabs continentSet={continentSet} setContinent={setContinent} countryList={countryList} setQueryList={setQueryList} setQuery={setQuery} />
 
-      {data ? query&&!queryList.length ? <p>"nothing found"</p> : <Table countryList={queryList.length ? queryList : countryList} /> : <p>"Loading..."</p>}
+      {data ? query&&!queryList.length ? <p>"nothing found"</p> : <Table countryList={queryList.length ? queryList : countryList}/> : <p>"Loading..."</p>}
     </div>
   );
 }

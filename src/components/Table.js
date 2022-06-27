@@ -5,10 +5,12 @@ import Edit from "./EditDetail.js";
 
 const Table = ({ countryList }) => {
   const [detail, setDetail] = useState();
-  const [info, setInfo] = useState()
   const [edit,setEdit] = useState(false)
   const [isOpen, setIsOpen] = useState(false);
-  const handleClose = useCallback(() => setIsOpen(false), []);
+  const handleClose = useCallback(() => {
+    setIsOpen(false)
+    setEdit(false)
+  }, []);
 
   const handleButtonClick = useCallback((countryName, allCountries) => {   //all countries is countryList
     setIsOpen(!isOpen);
@@ -21,8 +23,8 @@ const Table = ({ countryList }) => {
   return (
     <div>
       <Dialog isOpen={isOpen} onClose={handleClose}>
-       {edit ? <Edit detail={detail} close={handleClose} setEdit={setEdit} edit={edit} setInfo={setInfo} info={info}/> :
-        <DialogBody detail={detail} close={handleClose} setEdit={setEdit} edit={edit} info={info}/>
+       {edit ? <Edit detail={detail} close={handleClose} setEdit={setEdit} edit={edit} /> :
+        <DialogBody detail={detail} close={handleClose} setEdit={setEdit} edit={edit}/>
         }
       </Dialog>
 
@@ -32,13 +34,13 @@ const Table = ({ countryList }) => {
             <th>Country</th>
             <th>emoji</th>
             <th>Capital</th>
+            <th>URL</th>
           </tr>
         </thead>
         <tbody>
           {countryList
             ? countryList.map((country) => {
                 return (
-                  // <tr onClick={(event) => console.log(event.target.id)}>
                   <tr
                     onClick={(event) =>
                       handleButtonClick(event.target.id, countryList)
@@ -47,6 +49,7 @@ const Table = ({ countryList }) => {
                     <td id={country.name}>{country.name}</td>
                     <td>{country.emoji}</td>
                     <td>{country.capital}</td>
+                    {country.url ? <td>{country.url}</td> : <td></td>}
                   </tr>
                 );
               })
