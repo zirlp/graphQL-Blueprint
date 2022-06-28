@@ -12,10 +12,11 @@ const Table = ({ countryList }) => {
     setEdit(false)
   }, []);
 
-  const handleButtonClick = useCallback((countryName, allCountries) => {   //all countries is countryList
+  const handleButtonClick = useCallback((id, allCountries) => {   //all countries is countryList
+    if(id === "url" || !id ) return alert("coming soon feature...")
     setIsOpen(!isOpen);
     setDetail(
-      ...allCountries.filter((country) => country?.name === countryName)
+      ...allCountries.filter((country) => country?.code === id)
     );
   }, []);
 
@@ -35,6 +36,7 @@ const Table = ({ countryList }) => {
             <th>emoji</th>
             <th>Capital</th>
             <th>URL</th>
+            <th>Contacts</th>
           </tr>
         </thead>
         <tbody>
@@ -46,10 +48,11 @@ const Table = ({ countryList }) => {
                       handleButtonClick(event.target.id, countryList)
                     }
                   >
-                    <td id={country.name}>{country.name}</td>
-                    <td>{country.emoji}</td>
-                    <td>{country.capital}</td>
-                    {country.url ? <td>{country.url}</td> : <td></td>}
+                    <td id={country.code}>{country.name}</td>
+                    <td id={country.code}>{country.emoji}</td>
+                    <td id={country.code}>{country.capital}</td>
+                    {country.url ? <td id="url" >{country.url}</td> : <td></td>}
+                    <td> <button className="bp4-button bp4-small bp4-intent-primary " >contacts</button> </td>
                   </tr>
                 );
               })
