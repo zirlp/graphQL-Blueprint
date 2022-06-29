@@ -1,6 +1,6 @@
 // import { Dialog, DialogProps, Button } from "@blueprintjs/core";
 
-const DialogBody = ({ detail, close, setEdit, edit }) => {
+const Detail = ({ detail, close, setEdit, edit }) => {
 
   return (
     <div>
@@ -52,4 +52,4 @@ const DialogBody = ({ detail, close, setEdit, edit }) => {
   );
 };
 
-export default DialogBody;
+export default Detail;

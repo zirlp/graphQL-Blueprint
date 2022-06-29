@@ -18,6 +18,26 @@ export const LIST_COUNTRIES = gql`
       }
       comment
       url
+      contacts {
+        code
+        name
+        mail
+        comment
+      }
     }
   }
-`;
+`
+
+export const LIST_CONTACTS = gql`
+  {
+    contacts {
+      code
+      name
+      country {
+        name
+      }
+      mail
+      comment
+    }
+  }
+`

@@ -48,7 +48,6 @@ const Edit = ({detail, close, edit, setEdit }) => {
     setUrl(e.target.value)
     if(!regEx.test(e.target.value)) setValidate(true)
     else setValidate(false)
-    console.log(validate)
   }
 
   const handleSave = (url, comment) => {
@@ -121,7 +120,7 @@ const Edit = ({detail, close, edit, setEdit }) => {
 
     <div className="bp4-dialog-footer">
       <div className="bp4-dialog-footer-actions">
-        { !validate && url || comment ? <button
+        { !validate && (url || comment) ? <button
           type="submit"
           className="bp4-button bp4-intent-primary"
           onClick={()=>handleSave(url, comment)}

@@ -44,7 +44,7 @@ function Main() {
       
       <ContinentTabs continentSet={continentSet} setContinent={setContinent} countryList={countryList} setQueryList={setQueryList} setQuery={setQuery} />
 
-      {data ? query&&!queryList.length ? <p>"nothing found"</p> : <Table countryList={queryList.length ? queryList : countryList}/> : <p>"Loading..."</p>}
+      {data ? <Table countryList={queryList.length ? queryList : countryList}/> : <p>"Loading..."</p>}
     </div>
   );
 }

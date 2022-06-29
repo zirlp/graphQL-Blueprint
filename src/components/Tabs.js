@@ -12,8 +12,7 @@ const ContinentTabs = ({ continentSet, setContinent, countryList, setQueryList, 
     event.preventDefault()
     setInput(event.target.value)  //this is to "control" the input value
     setQuery(event.target.value)  //this is to pass it to parent component and do the filtering
-    setQueryList(countryList) //needed to do this to prevent the first search to be a "nothing found"
-    //if stops typing, trigger the search
+
     const delayedSearch = setTimeout(()=> {
       let searchQuery = countryList.filter((country)=> country.name.toLowerCase().includes(event.target.value.toLowerCase()) )
       setQueryList(searchQuery)
